@@ -1,0 +1,9 @@
+{
+	"extends": "tui/es6",
+	"parserOptions": {
+		"ecmaVersion": 8
+	},
+	"rules":{
+		"no-await-in-loop": 0
+	}
+}

@@ -1,0 +1,35 @@
+{
+  "name": "html-page-layout",
+  "version": "0.0.1",
+  "description": "html page layout",
+  "main": "index.js",
+  "scripts": {
+    "serve": "webpack-dev-server --progress --inline --hot",
+    "bundle": "webpack",
+    "deploy": "gh-pages -d examples -r https://github.com/dongsik-yoo/html-page-layout"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongsik-yoo/html-page-layout.git"
+  },
+  "keywords": [
+    "word processor",
+    "web word",
+    "html",
+    "page",
+    "layout"
+  ],
+  "author": "Dongsik Yoo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dongsik-yoo/html-page-layout/issues"
+  },
+  "homepage": "https://github.com/dongsik-yoo/html-page-layout#readme",
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-tui": "^1.0.3",
+    "gh-pages": "^1.1.0",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}

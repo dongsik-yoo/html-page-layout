@@ -1,0 +1,8 @@
+p {
+    margin: 0;
+    line-height: 1.54;
+}
+
+.page-body {
+    overflow-y: hidden;
+}
