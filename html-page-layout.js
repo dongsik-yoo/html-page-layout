@@ -119,15 +119,19 @@ class HtmlPageLayout {
     }
 
     setHtml(html) {
+        const selection = document.getSelection();
+        const range = document.createRange();
         const [pageBodyElement] = this.pageBodyElements;
         pageBodyElement.innerHTML = html;
 
-        setTimeout(() => {
-            this._scrollIntoView(pageBodyElement.parentElement, true);
-        }, 0);
-        setTimeout(() => {
-            this._layout();
-        }, 0);
+        this._layout();
+        this._scrollIntoView(pageBodyElement.parentElement, true);
+
+        // set the cursor at page body element
+        range.setStart(pageBodyElement.firstChild, 0);
+        range.setEnd(pageBodyElement.firstChild, 0);
+        selection.removeAllRanges();
+        selection.addRange(range);
     }
 
     _createPageContainer(parent) {
@@ -240,8 +244,6 @@ class HtmlPageLayout {
     async _layout() {
         let pageNumber = 1;
         while (pageNumber <= this.pageBodyElements.length) {
-            const pageBodyElement = this.pageBodyElements[pageNumber - 1];
-            this._scrollIntoView(pageBodyElement.parentElement);
             pageNumber = await this._layoutPage(pageNumber);
         }
     }
@@ -275,17 +277,9 @@ class HtmlPageLayout {
 
                 nextPageBodyElement = this.pageBodyElements[pageIndex + 1];
                 this._insertParagraphsToBodyAtFirst(nextPageBodyElement, allExceedParagraphs);
-                setTimeout(() => {
-                    this._scrollIntoView(nextPageBodyElement.parentElement);
-                }, 0);
-                setTimeout(() => {
-                    resolve(pageNumber + 1);
-                }, 0);
             }
 
-            setTimeout(() => {
-                resolve(pageNumber + 1);
-            }, 0);
+            resolve(pageNumber + 1);
         });
 
         return promise;
@@ -490,10 +484,10 @@ class HtmlPageLayout {
      * @param {boolean} immediatly - no smooth
      */
     _scrollIntoView(element, immediatly) {
-        // element.scrollIntoView({
-        //     block: 'start',
-        //     behavior: immediatly ? 'auto' : 'smooth'
-        // });
+        element.scrollIntoView({
+            block: 'start',
+            behavior: immediatly ? 'auto' : 'smooth'
+        });
     }
 }
 
